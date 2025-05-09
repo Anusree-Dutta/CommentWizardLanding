@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Outfit', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0a0f18;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #4F75FF;
+  --primary-hover: #3D61E0;
+  --secondary-color: #8C52FF;
+  /* Toning down the neon colors for less eye strain */
+  --neon-blue: rgba(0, 238, 255, 0.8);
+  --neon-purple: rgba(191, 0, 255, 0.8);
+  --neon-cyan: rgba(15, 240, 252, 0.8);
+  --text-color: #F9FAFB;
+  --bg-dark: #0B0F1A;
+  --bg-darker: #080C14;
+  --bg-card: #141B2D;
+  
+  /* Add smooth scrolling to the entire page */
+  scroll-behavior: smooth;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Remove this since we're adding it to :root */
+  /* scroll-behavior: smooth; */
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-color);
+  background: var(--bg-darker);
+  background-image: 
+    radial-gradient(circle at 80% 10%, rgba(18, 24, 48, 0.8) 0%, var(--bg-darker) 70%),
+    linear-gradient(to right, rgba(0, 56, 168, 0.05) 0%, rgba(140, 82, 255, 0.05) 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neon-text {
+  color: #fff;
+  text-shadow: 
+    0 0 3px var(--neon-blue),
+    0 0 7px var(--neon-blue),
+    0 0 12px var(--neon-blue);
+  /* Reduced intensity by lowering shadow sizes */
+  filter: brightness(0.85);
+}
+
+.neon-border {
+  position: relative;
+}
+
+.neon-border::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 
+    0 0 4px var(--neon-blue),
+    0 0 7px var(--neon-purple);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.neon-border:hover::after {
+  opacity: 1;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/40 focus:ring-4 focus:ring-blue-500/30 hover:scale-105;
+  box-shadow: 0 0 15px rgba(79, 117, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-cyan));
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-transparent backdrop-blur-sm border-2 border-white/20 text-white font-medium rounded-lg transition-all duration-300 hover:border-white/40 focus:ring-4 focus:ring-white/10 hover:scale-105;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.card {
+  @apply bg-[#141B2D]/80 backdrop-blur-xl rounded-xl border border-blue-900/30 shadow-lg;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 238, 255, 0.05), rgba(191, 0, 255, 0.05));
+  z-index: -1;
+}
+
+.feature-card {
+  @apply p-6 card transition-all duration-500 hover:border-blue-500/50 hover:shadow-blue-500/20 hover:shadow-xl;
+}
+
+.card-hover-effect {
+  @apply transition-all duration-300 hover:-translate-y-2;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 bg-[#141B2D]/60 border border-blue-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/70 text-white placeholder-gray-400;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 15px rgba(79, 117, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.navbar {
+  @apply backdrop-blur-xl rounded-full border border-blue-900/30 shadow-lg;
+  background: rgba(20, 27, 45, 0.6);
+  box-shadow: 
+    0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(79, 117, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(15, 23, 42, 0.3) 0%, transparent 70%);
+  top: -50%;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(140, 82, 255, 0.15) 0%, rgba(10, 15, 28, 0) 70%);
+  top: -10%;
+  right: -10%;
+  z-index: -1;
+  border-radius: 100%;
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+.reveal-animation {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* We're keeping the float animation from before */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* New animations */
+.typing-animation::after {
+  content: '|';
+  animation: typingCursor 1s infinite;
+}
+
+@keyframes typingCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+}
+
+.fade-up-animation {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.fade-up-animation.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scale-animation {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.scale-animation.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slide-in-animation {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.slide-in-animation.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.neon-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(rgba(79, 117, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 117, 255, 0.05) 1px, transparent 1px);
+  z-index: -1;
+  opacity: 0.5;
+  transition: transform 0.5s ease-out;
+}
+
+.glass-effect {
+  background: rgba(20, 27, 45, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(79, 117, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Improved animation delays */
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+/* Smooth hover transitions for all interactive elements */
+a, button, input, select, textarea {
+  transition: all 0.3s ease;
+}
+
+/* Improved floating cards animation with slightly different timing for a more natural effect */
+.float-card-1 {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-card-2 {
+  animation: float 8s ease-in-out infinite 0.5s;
+}
+
+.float-card-3 {
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+/* Glow animation for neon elements - reduced intensity */
+.neon-glow {
+  animation: glowPulse 2s ease-in-out infinite alternate;
+  filter: brightness(0.85);
+}
+
+@keyframes glowPulse {
+  0% {
+    filter: drop-shadow(0 0 1px var(--neon-blue)) drop-shadow(0 0 4px var(--neon-blue));
+  }
+  100% {
+    filter: drop-shadow(0 0 3px var(--neon-blue)) drop-shadow(0 0 10px var(--neon-blue));
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
+/* Glow Effects */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(20px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
